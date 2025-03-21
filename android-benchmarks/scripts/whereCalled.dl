@@ -1,0 +1,20 @@
+.type Context
+.type MethodInvocation
+.type Method
+
+.decl ReflectiveCallGraphEdge(?callerCtx:Context, ?invocation:MethodInvocation, ?calleeCtx:Context, ?callee:Method)
+.input ReflectiveCallGraphEdge(IO="file", filename="ReflectiveCallGraphEdge.csv", delimiter="\t")
+
+.decl SuspiciousMethod(?meth:Method)
+.input SuspiciousMethod(IO="file", filename="SuspiciousMethod.csv", delimiter="\t")
+
+.decl CallerOfSuspiciousMethod(?callee:Method, ?invocation:MethodInvocation)
+.output CallerOfSuspiciousMethod
+
+//.decl MatchedSuspiciousMethod(?callee:Method)
+//.output MatchedSuspiciousMethod
+
+//MatchedSuspiciousMethod(?callee),
+CallerOfSuspiciousMethod(?callee, ?invocation) :-
+  SuspiciousMethod(?callee),
+  ReflectiveCallGraphEdge(_, ?invocation, _, ?callee).

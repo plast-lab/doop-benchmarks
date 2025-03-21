@@ -1,0 +1,16 @@
+dacapo-2006 filter=lfs diff=lfs merge=lfs -text
+dacapo-bach filter=lfs diff=lfs merge=lfs -text
+julia-benchmarks filter=lfs diff=lfs merge=lfs -text
+poa.properties filter=lfs diff=lfs merge=lfs -text
+securibench-micro.jar filter=lfs diff=lfs merge=lfs -text
+tamiflex.runtime filter=lfs diff=lfs merge=lfs -text
+Android filter=lfs diff=lfs merge=lfs -text
+fetch-artifacts.sh filter=lfs diff=lfs merge=lfs -text
+fu-benchmark filter=lfs diff=lfs merge=lfs -text
+JREs filter=lfs diff=lfs merge=lfs -text
+android-benchmarks filter=lfs diff=lfs merge=lfs -text
+demos filter=lfs diff=lfs merge=lfs -text
+javaee-benchmarks filter=lfs diff=lfs merge=lfs -text
+poa.jar filter=lfs diff=lfs merge=lfs -text
+poa-master.228.jar filter=lfs diff=lfs merge=lfs -text
+*.jar filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,26 @@
+.type Method
+
+.decl DeadMethod(?meth:Method)
+.input DeadMethod(IO="file", filename="DeadMethods.csv", delimiter="\t")
+
+.decl _Method(?method:Method, ?simplename:symbol, ?descriptor:symbol, ?declaringType:symbol, ?returnType:symbol, ?jvmDescriptor:symbol)
+.input _Method(IO="file", filename="Method.facts", delimiter="\t")
+
+
+.decl DeadMethodWithJVMDescriptor(?jvmFullName:symbol)
+DeadMethodWithJVMDescriptor(?jvmFullName) :-
+  _Method(?method, ?simplename, _, ?class, _, ?sig),
+  DeadMethod(?method),
+  ?jvmFullName = cat("L", cat(?class, cat(";:", cat(?simplename, ?sig)))).
+
+.output DeadMethodWithJVMDescriptor
+
+/* Examples, from/to/data
+<com.facebook.browser.lite.common.FileUtil: void <init>()>
+Lcom/facebook/browser/lite/common/FileUtil;:<init>()V
+<com.facebook.browser.lite.common.FileUtil: void <init>()>	<init>	void()	com.facebook.browser.lite.common.FileUtil	void	()V
+
+<com.facebook.breakpad.BreakpadManager: boolean nativeSetJvmStreamEnabled(boolean,boolean)>
+Lcom/facebook/breakpad/BreakpadManager;:nativeSetJvmStreamEnabled(ZZ)Z
+<com.facebook.breakpad.BreakpadManager: boolean nativeSetJvmStreamEnabled(boolean,boolean)>	nativeSetJvmStreamEnabled	boolean(boolean,boolean)	com.facebook.breakpad.BreakpadManager	boolean	(ZZ)Z
+*/
