@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+
+description = """org.clyze:111-arrays-test"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+    // options.compilerArgs << "-Xlint:unchecked"
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+clyze {
+  port = clyze_port as Integer
+  // options.cache = 'true'
+  // dry = true
+}

@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+
+description = """org.clyze:107-lambdas"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+// Use 'gradle run' to record the lambdas.
+run {
+    jvmArgs '-Djdk.internal.lambda.dumpProxyClasses=lambdas'
+}
+
+clyze {
+  port = clyze_port as Integer
+  // options.cache = 'true'
+}

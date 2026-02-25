@@ -1,0 +1,10 @@
+[
+    {
+	"name" : "HelloJNI",
+	"methods" : [
+	    { "name" : "<init>", "parameterTypes" : [] },
+	    { "name" : "helloMethod", "parameterTypes" : ["java.lang.Object", "java.lang.Object"] },
+	    { "name" : "helloMethod2", "parameterTypes" : ["java.lang.Object"] }
+	]
+    }
+]

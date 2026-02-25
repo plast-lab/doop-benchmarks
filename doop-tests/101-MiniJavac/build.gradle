@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'clyze'
+apply plugin: 'application'
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'Main'
+
+run {
+    //runs the system's Java compiler with the jcplugin enabled automagically
+    if(project.hasProperty("args")) {
+        args project.property("args").split()
+    }
+}
+
+clyze {
+    port = clyze_port as Integer
+    // options.platform= 'java_7_debug'
+    // options.main_class = "Main"
+    // cachePostDir = 'cached-build'
+    // dry = true
+}

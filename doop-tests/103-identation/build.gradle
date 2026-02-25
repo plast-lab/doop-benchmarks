@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+
+description = """org.clyze:103-identation-test"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+tasks.withType(JavaCompile) {
+	// options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+clyze {
+  port = clyze_port as Integer
+  // options.cache = 'true'
+}

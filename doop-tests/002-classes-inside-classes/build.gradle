@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'clyze'
+apply plugin: 'application'
+
+version '1.0-SNAPSHOT'
+
+mainClassName = "Main"
+
+clyze {
+    port = clyze_port as Integer
+    // options.platform = 'java_7'
+}

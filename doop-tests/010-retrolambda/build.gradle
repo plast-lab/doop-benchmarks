@@ -1,0 +1,76 @@
+buildscript {
+    //configurations.classpath.resolutionStrategy.cacheChangingModulesFor(0, 'seconds')
+    configurations.all {
+        //This is required for SNAPSHOT dependencies
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        //This is required for dependencies using the "+" notation
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://raw.github.com/msridhar/maven-jars/mvn-repo/"
+        }
+        maven {
+            url "${artifactory_contextUrl}/plast-public"
+        }
+        maven {
+            url "${artifactory_contextUrl}/plast-private"
+            credentials {
+                username = artifactory_user
+                password = artifactory_password
+            }
+        }
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+    }
+
+    dependencies {
+        classpath ('org.clyze:doop-gradle-plugin:4.0.+')
+    }
+}
+
+repositories {
+   mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'doop'
+
+group = 'org.clyze'
+description = """org.clyze:010-retrolambda-test"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+retrolambda {
+  javaVersion JavaVersion.VERSION_1_7
+  defaultMethods true
+  // incremental true
+}
+
+doop {
+  port = clue_port as Integer
+  options.platform = 'java_7'
+  // options.cache = 'true'
+  // cachePost = true
+  // dry = true
+}

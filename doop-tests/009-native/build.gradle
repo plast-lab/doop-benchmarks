@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+apply plugin: "org.mikeneck.graalvm-native-image"
+
+description = """org.clyze:009-native-test"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+}
+
+mainClassName = "HelloJNI"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+clyze {
+    port = clyze_port as Integer
+    // options.platform = 'java_7'
+    // options.fact_gen_cores = '1'
+    // options.simulate_native_returns = 'true'
+    hprofs = [ 'java.hprof' ]
+}
+
+nativeImage {
+    graalVmHome = System.getenv('GRAALVM_HOME')
+    mainClass = mainClassName
+    executableName = 'main'
+    outputDirectory = file("$buildDir/bin")
+    arguments(
+        '--allow-incomplete-classpath',
+        '--report-unsupported-elements-at-runtime',
+        '--no-fallback',
+        '--no-server',
+	'--native-image-info',
+	'--initialize-at-run-time=HelloJNI',
+        '--enable-all-security-services',
+        '--report-unsupported-elements-at-runtime',
+	'-H:+PrintClassInitialization',
+	'-H:JNIConfigurationFiles=jni-conf.json',
+	'-H:IncludeResources=.*/libhello.*'
+    )
+}

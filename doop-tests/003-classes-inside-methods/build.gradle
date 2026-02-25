@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+apply plugin: 'clyze'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+clyze {
+    port = clyze_port as Integer
+    // options.platform = 'java_7'
+}

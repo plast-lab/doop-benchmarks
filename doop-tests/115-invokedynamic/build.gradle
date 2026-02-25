@@ -1,0 +1,70 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+apply plugin: "org.mikeneck.graalvm-native-image"
+
+description = """org.clyze:115-invokedynamic"""
+
+repositories {
+    // mavenCentral()
+    jcenter()
+}
+dependencies {
+    compile 'org.ow2.asm:asm:7.0', 'org.ow2.asm:asm-commons:7.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+// Use 'gradle run' to generate the .hprof file.
+run {
+    jvmArgs = [
+      // Deprecated in recent Java versions.
+      // '-agentlib:hprof=heap=dump,format=b,depth=16,file=115-invokedynamic',
+      '-Djdk.internal.lambda.dumpProxyClasses=lambdas-out'
+    ]
+}
+
+clyze {
+  port = clyze_port as Integer
+  // options.reflection_classic = 'true'
+  // options.distinguish_all_string_constants = 'true'
+  // options.distinguish_reflection_only_string_constants = 'true'
+  // options.reflection = 'true'
+  // options.reflection_substring_analysis = 'true'
+  // options.distinguish_string_buffers_per_package = 'true'
+  // options.fact_gen_cores = '1'
+  // options.cache = 'true'
+  // options.reflection_method_handles = 'true'
+  // hprofs = [ '115-invokedynamic.hprof' ]
+  // cachePostDir = 'cached-build'
+  // dry = true
+}
+
+nativeImage {
+    graalVmHome = System.getenv('GRAALVM_HOME')
+    mainClass = mainClassName
+    executableName = 'main'
+    outputDirectory = file("$buildDir/bin")
+    arguments(
+        '--allow-incomplete-classpath',
+        '--report-unsupported-elements-at-runtime',
+        '--no-fallback',
+        '--no-server',
+	'--native-image-info',
+        '--enable-all-security-services',
+        '--report-unsupported-elements-at-runtime'
+    )
+}

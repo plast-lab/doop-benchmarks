@@ -1,0 +1,16 @@
+This test is based on the Mockito Tutorial by tutorialspoint.com:
+https://www.tutorialspoint.com/mockito/index.htm
+
+Note: This code uses mockito 2.10.0 which is based on Byte Buddy. To
+switch to the old cglib-based mockito, use the 2.0.2-beta dependency
+in build.gradle.
+
+To analyze this project, 'gradle analyze' is not enough, as Soot may
+miss some classes. You should use the "fat JAR" provided and post it
+via gradle-plugin:
+
+  (without HPROF information)
+  build-tools% ./gradlew :gradle-plugin:replayPost -Pargs="full-path-to/fat-doop-project/"
+
+  (with HPROF information)
+  build-tools% ./gradlew :gradle-plugin:replayPost -Pargs="full-path-to/fat-doop-project-hprof/"

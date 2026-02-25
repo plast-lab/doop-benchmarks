@@ -1,0 +1,12 @@
+apply plugin: "java"
+apply plugin: 'clyze'
+apply plugin: "application"
+
+mainClassName = "Main"
+
+clyze {
+    port = clyze_port as Integer
+    // options.platform = "java_7_debug"
+    // options.main_class = mainClassName
+    // options.cache = 'true'
+}

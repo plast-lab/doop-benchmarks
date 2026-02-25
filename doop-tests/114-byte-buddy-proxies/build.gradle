@@ -1,0 +1,67 @@
+buildscript {
+    //configurations.classpath.resolutionStrategy.cacheChangingModulesFor(0, 'seconds')
+    configurations.all {
+        //This is required for SNAPSHOT dependencies
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        //This is required for dependencies using the "+" notation
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://raw.github.com/msridhar/maven-jars/mvn-repo/"
+        }
+        maven {
+            url "${artifactory_contextUrl}/plast-public"
+        }
+        maven {
+            url "${artifactory_contextUrl}/plast-private"
+            credentials {
+                username = artifactory_user
+                password = artifactory_password
+            }
+        }
+    }
+
+    dependencies {
+        classpath ('org.clyze:doop-gradle-plugin:4.0.+')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'doop'
+
+group = 'org.clyze'
+description = """org.clyze:114-byte-buddy-proxies"""
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "net.bytebuddy:byte-buddy:1.7.9"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+doop {
+  port = clue_port as Integer
+  options.platform = 'java_7'
+  // options.cache = 'true'
+}

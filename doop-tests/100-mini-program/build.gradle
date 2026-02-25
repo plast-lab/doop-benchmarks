@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'clyze'
+apply plugin: 'application'
+
+version '1.0-SNAPSHOT'
+
+mainClassName = "test.Main"
+
+clyze {
+    port = clyze_port as Integer
+    //options.only_application_classes_fact_gen = 'true'
+    // options.main_class = mainClassName
+}
+

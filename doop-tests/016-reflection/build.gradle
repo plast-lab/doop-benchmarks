@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+
+description = """org.clyze:016-reflection-test"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+// Use 'gradle runHPROFAgent' to generate the .hprof file.
+// Deprecated in recent Java versions.
+task runHPROFAgent(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  main = mainClassName
+  jvmArgs '-agentlib:hprof=heap=dump,format=b,depth=8,file=016-reflection.hprof'
+}
+
+// Uncomment to see the "unchecked" warning for Class.forName().
+// allprojects {
+//     gradle.projectsEvaluated {
+//         tasks.withType(JavaCompile) {
+//             options.compilerArgs << "-Xlint:unchecked"
+//         }
+//     }
+// }
+
+clyze {
+  port = clyze_port as Integer
+  // options.reflection_classic = 'true'
+  // options.fact_gen_cores = '1'
+  // == these are the same as reflection-classic ==
+  // options.reflection = 'true'
+  // options.distinguish_reflection_only_string_constants = 'true'
+  // options.distinguish_string_buffers_per_package = 'true'
+  // options.reflection_substring_analysis = 'true'
+  // == extra reflection options ==
+  // options.distinguish_all_string_constants = 'true'
+  // hprofs = [ "016-reflection.hprof" ]
+}

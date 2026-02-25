@@ -1,0 +1,101 @@
+Initialized native services in: /home/gfour/.gradle/native
+The client will now receive all logging from the daemon (pid: 39810). The daemon log file: /home/gfour/.gradle/daemon/5.4.1/daemon-39810.out.log
+Starting 3rd build in daemon [uptime: 1 mins 56.493 secs, performance: 98%, non-heap usage: 23% of 268.4 MB]
+Using 32 worker leases.
+Starting Build
+Settings evaluated using settings file '/usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/standalone_settings.gradle'.
+Projects loaded. Root project using build file '/usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build.gradle'.
+Included projects: [root project '013-enums']
+
+> Configure project :
+Evaluating root project '013-enums' using build file '/usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build.gradle'.
+Downloading http://centauri.di.uoa.gr:8081/artifactory/plast-public/org/clyze/gradle-plugin/maven-metadata.xml to /tmp/gradle_download7117422927581770442bin
+Downloading http://centauri.di.uoa.gr:8081/artifactory/plast-public/org/clyze/gradle-plugin/4.0.57/gradle-plugin-4.0.57.pom to /tmp/gradle_download468158347724528833bin
+Compiling build file '/usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build.gradle' using BuildScriptTransformer.
+[Clyze] Gradle plugin [Version: 4.0.58 (Git hash: ec0d9d9d7029936299c227db72f1c62587509556)]
+[Clyze] Project platform: Java
+[Clyze] Plugging metadata processor into task compileJava
+[Clyze] Plugging metadata processor into task compileTestJava
+[Clyze] Sources archive: 013-enums-sources.jar
+[Clyze] Also adding sources from test
+All projects evaluated.
+Selected primary task 'clean' from project :
+Selected primary task 'createBundle' from project :
+Selected primary task 'postBundle' from project :
+Tasks to be executed: [task ':clean', task ':configurations', task ':compileJava', task ':processResources', task ':classes', task ':jar', task ':jcpluginZip', task ':sourcesJar', task ':createBundle', task ':postBundle']
+:clean (Thread[Execution worker for ':',5,main]) started.
+
+> Task :clean
+Caching disabled for task ':clean' because:
+  Build cache is disabled
+Task ':clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+:clean (Thread[Execution worker for ':',5,main]) completed. Took 0.049 secs.
+:configurations (Thread[Execution worker for ':',5,main]) started.
+
+> Task :configurations
+Caching disabled for task ':configurations' because:
+  Build cache is disabled
+Task ':configurations' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+[Clyze] Configurations written to: /usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/.clue-bundle/configurations.zip
+:configurations (Thread[Execution worker for ':',5,main]) completed. Took 0.02 secs.
+:compileJava (Thread[Execution worker for ':',5,main]) started.
+
+> Task :compileJava
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Task ':compileJava' is not up-to-date because:
+  Output property 'destinationDir' file /usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build/classes/java/main has been removed.
+  Output property 'destinationDir' file /usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build/classes/java/main/Main$PrefKey.class has been removed.
+  Output property 'destinationDir' file /usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build/classes/java/main/Main$SmartToastType.class has been removed.
+All input files are considered out-of-date for incremental task ':compileJava'.
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with JDK Java compiler API.
+Created classpath snapshot for incremental compilation in 0.0 secs.
+:compileJava (Thread[Execution worker for ':',5,main]) completed. Took 0.277 secs.
+:processResources (Thread[Execution worker for ':',5,main]) started.
+
+> Task :processResources NO-SOURCE
+file or directory '/usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/src/main/resources', not found
+Skipping task ':processResources' as it has no source files and no previous output files.
+:processResources (Thread[Execution worker for ':',5,main]) completed. Took 0.001 secs.
+:classes (Thread[Execution worker for ':',5,main]) started.
+
+> Task :classes
+Skipping task ':classes' as it has no actions.
+:classes (Thread[Execution worker for ':',5,main]) completed. Took 0.0 secs.
+:jar (Thread[Execution worker for ':',5,main]) started.
+
+> Task :jar
+Caching disabled for task ':jar' because:
+  Build cache is disabled
+Task ':jar' is not up-to-date because:
+  Output property 'archiveFile' file /usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/build/libs/013-enums.jar has been removed.
+:jar (Thread[Execution worker for ':',5,main]) completed. Took 0.004 secs.
+:jcpluginZip (Thread[Execution worker for ':',5,main]) started.
+
+> Task :jcpluginZip
+Caching disabled for task ':jcpluginZip' because:
+  Build cache is disabled
+Task ':jcpluginZip' is not up-to-date because:
+  Input property 'rootSpec$1' file /usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/.clue-bundle/json/Main.json has changed.
+:jcpluginZip (Thread[Execution worker for ':',5,main]) completed. Took 0.008 secs.
+:sourcesJar (Thread[Execution worker for ':',5,main]) started.
+
+> Task :sourcesJar UP-TO-DATE
+file or directory '/usr/data/gfour/Downloads/clue/server-analysis-tests/013-enums/src/main/resources', not found
+Caching disabled for task ':sourcesJar' because:
+  Build cache is disabled
+Skipping task ':sourcesJar' as it is up-to-date.
+:sourcesJar (Thread[Execution worker for ':',5,main]) completed. Took 0.003 secs.
+:createBundle (Thread[Execution worker for ':',5,main]) started.
+
+> Task :createBundle
+Caching disabled for task ':createBundle' because:
+  Build cache is disabled
+Task ':createBundle' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+[Clyze] Bundle created.
+:createBundle (Thread[Execution worker for ':',5,main]) completed. Took 0.0 secs.
+:postBundle (Thread[Execution worker for ':',5,main]) started.

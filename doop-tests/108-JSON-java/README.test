@@ -1,0 +1,9 @@
+This is a slightly rearrange repo for JSON-java (also known as
+org.json:json in Maven Central).
+
+This test works with "gradle analyze". However, the codebase should be
+similar to Maven Central artifact "org.json:json:20151123", which can
+be fed to the clue-crawler.
+
+Thus, this test can be used to find differences between
+gradle-plugin and clue-crawler.

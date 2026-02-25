@@ -1,0 +1,50 @@
+apply plugin: 'java-library'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'clyze'
+apply plugin: 'org.mikeneck.graalvm-native-image'
+
+description = """org.clyze:006-hello-world-test"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    // options.encoding = 'UTF-8'
+}
+
+mainClassName = "Main"
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}
+
+clyze {
+    port = clyze_port as Integer
+    configurationFiles = ['rules.pro']
+    debug = true
+    // options.cache = 'true'
+}
+
+nativeImage {
+    graalVmHome = System.getenv('GRAALVM_HOME')
+    mainClass = mainClassName
+    executableName = 'main'
+    outputDirectory = file("$buildDir/bin")
+    arguments(
+        '--allow-incomplete-classpath',
+        '--report-unsupported-elements-at-runtime',
+        '--no-fallback',
+        '--no-server',
+	'--native-image-info',
+        '--enable-all-security-services',
+        '--report-unsupported-elements-at-runtime'
+    )
+}

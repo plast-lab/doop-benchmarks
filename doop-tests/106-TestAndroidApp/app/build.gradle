@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+apply plugin: 'clyze'
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+        applicationId "com.example.george.testandroidapp"
+        minSdkVersion 22
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}
+
+clyze {
+    port = 8020
+    // options.analysis = 'context-insensitive'
+    // options.platform = 'android_25_fulljars'
+    // options.reflection_classic = 'true'
+    // options.simulate_native_returns = 'true'
+    // options.x_server_logic_threshold = '1500'
+    // subprojectName = 'app'
+    buildType = 'debug'
+    // dry = true
+    // cachePostDir = 'cached-build'
+}

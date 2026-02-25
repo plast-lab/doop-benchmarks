@@ -1,0 +1,34 @@
+This test is based on the Mockito Hello World Example:
+https://examples.javacodegeeks.com/core-java/mockito/mockito-hello-world-example
+
+Note: This code uses the old mockito 2.0.5-beta which is based on
+cglib, while newer versions of mockito use byte-buddy. From
+https://github.com/mockito/mockito-cglib:
+
+"[mockito-cglib] Contains the integration with cglib which has been
+discontinued in the core mockito in favor of ByteBuddy. The source
+code kept here 'just in case' we need that in the future. We hope not
+to ship Mockito with cglib any more."
+
+Differences:
+
+- Uses build.gradle instead of the original pom.xml.
+
+- Test code is included in the sources (not in separate 'test'
+  sub-directory), so that it can be fed into Doop.
+
+- A driving main() has been added to MockitoHelloWorldExample, to make
+  the test code reachable. Otherwise, in the absence of such a main()
+  method, open-program analysis may happen, which is too generic for
+  this test. (Alternatively, this can be automated if annotations such
+  @Test or @BeforeMethod are seen by Doop.)
+
+To analyze this project, 'gradle analyze' is not enough, as Soot may
+miss some classes. You should use the "fat JAR" provided and post it
+via gradle-plugin:
+
+  (without HPROF information)
+  build-tools% ./gradlew :gradle-plugin:replayPost -Pargs="full-path-to/fat-doop-project/"
+
+  (with HPROF information)
+  build-tools% ./gradlew :gradle-plugin:replayPost -Pargs="full-path-to/fat-doop-project-hprof/"
